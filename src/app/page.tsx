@@ -56,10 +56,10 @@ export default function ServiceBusinessHomepage() {
                 </a>
 
                 <a
-                  href="tel:+13125551234"
+                  href="tel:+13124786298"
                   className="rounded-2xl border border-neutral-300 px-7 py-4 font-medium hover:bg-neutral-100 transition-colors"
                 >
-                  Call (312) 555-1234
+                  Call (312) 478-6298
                 </a>
               </div>
             </div>
@@ -258,7 +258,7 @@ export default function ServiceBusinessHomepage() {
             <div className="mt-10 space-y-6 text-neutral-900 text-lg">
               <div>
                 <div className="text-neutral-500 mb-1">Phone</div>
-                <div>(312) 555-1234</div>
+                <div>(312) 478-6298</div>
               </div>
 
               <div>

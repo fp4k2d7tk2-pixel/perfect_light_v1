@@ -33,12 +33,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
-
-        <footer style={{ marginTop: 'auto', padding: '20px', textAlign: 'center' }}>
-          <a href="tel:3124786298" style={{ color: 'inherit', textDecoration: 'none', fontSize: '14px' }}>
-            (312) 478-6298
-          </a>
-        </footer>
       </body>
     </html>
   );
