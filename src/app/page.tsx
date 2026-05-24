@@ -278,7 +278,7 @@ export default function ServiceBusinessHomepage() {
                   Project Details
                 </label>
                 <textarea
-                  rows="5"
+                  rows={5}
                   className="w-full rounded-2xl border border-neutral-700 bg-black px-5 py-4 outline-none focus:border-white transition-colors"
                   placeholder="Tell us about your project..."
                 />
