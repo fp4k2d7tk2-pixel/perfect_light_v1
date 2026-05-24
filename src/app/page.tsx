@@ -1,23 +1,47 @@
 export default function ServiceBusinessHomepage() {
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans">
+    <div className="min-h-screen bg-white text-neutral-900 font-sans">
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <a href="#" className="flex items-center">
+            <img
+              src="/logo.png"
+              alt="Perfect Light Electrical logo"
+              className="h-14 md:h-16 w-auto object-contain"
+            />
+          </a>
+
+          <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-600">
+            <a href="#services" className="hover:text-black transition-colors">
+              Services
+            </a>
+            <a href="#about" className="hover:text-black transition-colors">
+              About
+            </a>
+            <a href="#contact" className="hover:text-black transition-colors">
+              Contact
+            </a>
+          </nav>
+        </div>
+      </header>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-neutral-800">
-        <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black opacity-100" />
+        <div className="absolute inset-0 bg-gray-50" />
 
         <div className="relative max-w-7xl mx-auto px-6 py-28 lg:py-40">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="inline-flex items-center rounded-full border border-neutral-700 px-4 py-2 text-sm text-neutral-300 mb-6 backdrop-blur">
+              <div className="inline-flex items-center rounded-full border border-neutral-200 px-4 py-2 text-sm text-neutral-600 bg-white/70 mb-6 backdrop-blur">
                 Licensed • Insured • Residential & Commercial
               </div>
 
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-tight">
                 Premium Electrical
-                <span className="block text-neutral-400">Work Done Right.</span>
+                <span className="block text-neutral-500">Work Done Right.</span>
               </h1>
 
-              <p className="mt-8 text-lg text-neutral-300 max-w-xl leading-relaxed">
+              <p className="mt-8 text-lg text-neutral-600 max-w-xl leading-relaxed">
                 Modern electrical installations, lighting design, troubleshooting,
                 and service upgrades for homes and businesses throughout the
                 Chicago area.
@@ -33,7 +57,7 @@ export default function ServiceBusinessHomepage() {
 
                 <a
                   href="tel:+13125551234"
-                  className="rounded-2xl border border-neutral-700 px-7 py-4 font-medium hover:bg-neutral-900 transition-colors"
+                  className="rounded-2xl border border-neutral-300 px-7 py-4 font-medium hover:bg-neutral-100 transition-colors"
                 >
                   Call (312) 555-1234
                 </a>
@@ -41,7 +65,7 @@ export default function ServiceBusinessHomepage() {
             </div>
 
             <div>
-              <div className="rounded-3xl overflow-hidden border border-neutral-800 shadow-2xl bg-neutral-900">
+              <div className="rounded-3xl overflow-hidden border border-neutral-200 shadow-2xl bg-white">
                 <img
                   src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=1600&auto=format&fit=crop"
                   alt="Modern electrical work"
@@ -54,7 +78,7 @@ export default function ServiceBusinessHomepage() {
       </section>
 
       {/* Services */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section id="services" className="max-w-7xl mx-auto px-6 py-24">
         <div className="max-w-2xl mb-14">
           <p className="text-sm uppercase tracking-[0.25em] text-neutral-500 mb-4">
             Services
@@ -93,23 +117,23 @@ export default function ServiceBusinessHomepage() {
           ].map((service) => (
             <div
               key={service.title}
-              className="rounded-3xl border border-neutral-800 bg-neutral-900/50 p-8 hover:bg-neutral-900 transition-colors"
+              className="rounded-3xl border border-neutral-200 bg-white p-8 hover:bg-gray-50 transition-colors"
             >
               <h3 className="text-2xl font-medium mb-4">{service.title}</h3>
-              <p className="text-neutral-400 leading-relaxed">{service.desc}</p>
+              <p className="text-neutral-500 leading-relaxed">{service.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* About */}
-      <section className="border-y border-neutral-800 bg-neutral-900/40">
+      <section id="about" className="border-y border-neutral-200 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <img
               src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1600&auto=format&fit=crop"
               alt="Professional electrician"
-              className="rounded-3xl border border-neutral-800 object-cover h-[500px] w-full"
+              className="rounded-3xl border border-neutral-200 object-cover h-[500px] w-full"
             />
           </div>
 
@@ -122,7 +146,7 @@ export default function ServiceBusinessHomepage() {
               Detail-oriented work with modern design sensibility.
             </h2>
 
-            <p className="mt-8 text-neutral-300 text-lg leading-relaxed">
+            <p className="mt-8 text-neutral-600 text-lg leading-relaxed">
               We believe electrical work should be both technically excellent and
               visually clean. From lighting layouts to panel organization, every
               installation is approached with craftsmanship, precision, and long-term
@@ -132,12 +156,12 @@ export default function ServiceBusinessHomepage() {
             <div className="mt-10 grid grid-cols-2 gap-6">
               <div>
                 <div className="text-4xl font-semibold">10+</div>
-                <div className="text-neutral-400 mt-2">Years Experience</div>
+                <div className="text-neutral-500 mt-2">Years Experience</div>
               </div>
 
               <div>
                 <div className="text-4xl font-semibold">500+</div>
-                <div className="text-neutral-400 mt-2">Projects Completed</div>
+                <div className="text-neutral-500 mt-2">Projects Completed</div>
               </div>
             </div>
           </div>
@@ -175,9 +199,9 @@ export default function ServiceBusinessHomepage() {
           ].map((item) => (
             <div
               key={item.name}
-              className="rounded-3xl border border-neutral-800 p-8 bg-neutral-900/40"
+              className="rounded-3xl border border-neutral-200 p-8 bg-white"
             >
-              <p className="text-lg leading-relaxed text-neutral-300">
+              <p className="text-lg leading-relaxed text-neutral-600">
                 “{item.quote}”
               </p>
 
@@ -189,13 +213,13 @@ export default function ServiceBusinessHomepage() {
 
       {/* CTA */}
       <section className="px-6 pb-24">
-        <div className="max-w-7xl mx-auto rounded-[2rem] border border-neutral-800 bg-gradient-to-br from-neutral-900 to-black p-10 md:p-16">
+        <div className="max-w-7xl mx-auto rounded-[2rem] border border-neutral-200 bg-gray-50 p-10 md:p-16">
           <div className="max-w-3xl">
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight leading-tight">
               Ready to start your project?
             </h2>
 
-            <p className="mt-6 text-lg text-neutral-300 leading-relaxed">
+            <p className="mt-6 text-lg text-neutral-600 leading-relaxed">
               Get in touch for consultations, troubleshooting, upgrades, and
               lighting projects throughout the Chicago area.
             </p>
@@ -210,7 +234,7 @@ export default function ServiceBusinessHomepage() {
 
               <a
                 href="mailto:hello@yourdomain.com"
-                className="rounded-2xl border border-neutral-700 px-7 py-4 font-medium hover:bg-neutral-900 transition-colors"
+                className="rounded-2xl border border-neutral-300 px-7 py-4 font-medium hover:bg-neutral-100 transition-colors"
               >
                 hello@yourdomain.com
               </a>
@@ -220,7 +244,7 @@ export default function ServiceBusinessHomepage() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="border-t border-neutral-800 bg-black">
+      <section id="contact" className="border-t border-neutral-200 bg-white">
         <div className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16">
           <div>
             <p className="text-sm uppercase tracking-[0.25em] text-neutral-500 mb-4">
@@ -231,7 +255,7 @@ export default function ServiceBusinessHomepage() {
               Let’s talk about your project.
             </h2>
 
-            <div className="mt-10 space-y-6 text-neutral-300 text-lg">
+            <div className="mt-10 space-y-6 text-neutral-900 text-lg">
               <div>
                 <div className="text-neutral-500 mb-1">Phone</div>
                 <div>(312) 555-1234</div>
@@ -249,44 +273,44 @@ export default function ServiceBusinessHomepage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-neutral-800 bg-neutral-900/40 p-8">
+          <div className="rounded-3xl border border-neutral-200 bg-white p-8">
             <form className="space-y-6">
               <div>
-                <label className="block text-sm text-neutral-400 mb-2">
+                <label className="block text-sm text-neutral-600 mb-2">
                   Name
                 </label>
                 <input
                   type="text"
-                  className="w-full rounded-2xl border border-neutral-700 bg-black px-5 py-4 outline-none focus:border-white transition-colors"
+                  className="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-4 outline-none focus:border-black transition-colors"
                   placeholder="Your name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-neutral-400 mb-2">
+                <label className="block text-sm text-neutral-600 mb-2">
                   Email
                 </label>
                 <input
                   type="email"
-                  className="w-full rounded-2xl border border-neutral-700 bg-black px-5 py-4 outline-none focus:border-white transition-colors"
+                  className="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-4 outline-none focus:border-black transition-colors"
                   placeholder="you@example.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-neutral-400 mb-2">
+                <label className="block text-sm text-neutral-600 mb-2">
                   Project Details
                 </label>
                 <textarea
                   rows={5}
-                  className="w-full rounded-2xl border border-neutral-700 bg-black px-5 py-4 outline-none focus:border-white transition-colors"
+                  className="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-4 outline-none focus:border-black transition-colors"
                   placeholder="Tell us about your project..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full rounded-2xl bg-white text-black px-7 py-4 font-medium hover:scale-[1.01] transition-transform"
+                className="w-full rounded-2xl bg-black text-white px-7 py-4 font-medium hover:scale-[1.01] transition-transform"
               >
                 Send Request
               </button>
