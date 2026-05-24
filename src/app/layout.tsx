@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "Professional electrical services in Chicago. Lighting, troubleshooting, upgrades, and residential/commercial work.",
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon.ico",
   },
 };
 
