@@ -233,10 +233,10 @@ export default function ServiceBusinessHomepage() {
               </a>
 
               <a
-                href="mailto:hello@yourdomain.com"
+                href="mailto:contact@perfectlightchicago.com"
                 className="rounded-2xl border border-neutral-300 px-7 py-4 font-medium hover:bg-neutral-100 transition-colors"
               >
-                hello@yourdomain.com
+                contact@perfectlightchicago.com
               </a>
             </div>
           </div>
@@ -263,7 +263,7 @@ export default function ServiceBusinessHomepage() {
 
               <div>
                 <div className="text-neutral-500 mb-1">Email</div>
-                <div>hello@yourdomain.com</div>
+                <div>contact@perfectlightchicago.com</div>
               </div>
 
               <div>
