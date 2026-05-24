@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "Professional electrical services in Chicago. Lighting, troubleshooting, upgrades, and residential/commercial work.",
   icons: {
-    icon: [{ url: "/favicon-v2.ico" }],
+    icon: [{ url: "/favicon-v2.ico?v=2" }],
   },
 };
 
@@ -32,7 +32,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" href="/favicon-v2.ico" />
+        <link rel="icon" href="/favicon-v2.ico?v=2" />
       </head>
 
       <body className="min-h-full flex flex-col">
