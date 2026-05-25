@@ -1,3 +1,5 @@
+import ContactForm from "@/components/ContactForm";
+
 export default function ServiceBusinessHomepage() {
   return (
     <div className="min-h-screen bg-white text-neutral-900 font-sans">
@@ -274,47 +276,7 @@ export default function ServiceBusinessHomepage() {
           </div>
 
           <div className="rounded-3xl border border-neutral-200 bg-white p-8">
-            <form className="space-y-6">
-              <div>
-                <label className="block text-sm text-neutral-600 mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-4 outline-none focus:border-black transition-colors"
-                  placeholder="Your name"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-neutral-600 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-4 outline-none focus:border-black transition-colors"
-                  placeholder="you@example.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-neutral-600 mb-2">
-                  Project Details
-                </label>
-                <textarea
-                  rows={5}
-                  className="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-4 outline-none focus:border-black transition-colors"
-                  placeholder="Tell us about your project..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full rounded-2xl bg-black text-white px-7 py-4 font-medium hover:scale-[1.01] transition-transform"
-              >
-                Send Request
-              </button>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>
