@@ -3,6 +3,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set');
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
+    }
+
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { name, email, message } = await request.json();
 
@@ -24,7 +32,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Send email using Resend
-    const data = await resend.emails.send({
+    const response = await resend.emails.send({
       from: 'Perfect Light <contact@perfectlightchicago.com>',
       to: 'contact@perfectlightchicago.com',
       replyTo: email,
@@ -40,16 +48,16 @@ export async function POST(request: NextRequest) {
       `,
     });
 
-    if (data.error) {
-      console.error('Resend error:', data.error);
+    if (response.error) {
+      console.error('Resend error:', response.error);
       return NextResponse.json(
-        { error: 'Failed to send email' },
+        { error: 'Failed to send email. Please try again later.' },
         { status: 500 }
       );
     }
 
     return NextResponse.json(
-      { success: true, id: data.data?.id },
+      { success: true, id: response.data?.id },
       { status: 200 }
     );
   } catch (error) {
