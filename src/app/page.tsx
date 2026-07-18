@@ -2,8 +2,7 @@ import ContactForm from "@/components/ContactForm";
 
 export default function ServiceBusinessHomepage() {
   return (
-    <div className="min-h-screen bg-white text-neutral-900 font-sans">
-      {/* Header */}
+    <div className="min-h-screen bg-white text-neutral-900">
       <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <a href="#" className="flex items-center">
@@ -27,7 +26,41 @@ export default function ServiceBusinessHomepage() {
           </nav>
         </div>
       </header>
-      {/* Hero */}
+
+      <section id="contact" className="border-b border-neutral-200 bg-neutral-950 text-white">
+        <div className="max-w-7xl mx-auto px-6 py-24">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-start">
+            <div>
+              <p className="text-sm uppercase tracking-[0.25em] text-neutral-400 mb-4">
+                Contact
+              </p>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
+                Chicago&apos;s Finest Electricians
+              </h2>
+              <p className="mt-6 text-lg text-neutral-300 max-w-xl leading-relaxed">
+                Fast response, clean work, and dependable service for homes and businesses across Chicago.
+              </p>
+
+              <div className="mt-8 rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur">
+                <p className="text-sm uppercase tracking-[0.25em] text-neutral-400 mb-3">
+                  Call now
+                </p>
+                <a
+                  href="tel:+13124786298"
+                  className="text-3xl md:text-4xl font-semibold hover:text-neutral-200 transition-colors"
+                >
+                  (312) 478-6298
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-neutral-200 bg-white p-8 text-neutral-900 shadow-2xl">
+              <ContactForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="relative overflow-hidden border-b border-neutral-800">
         <div className="absolute inset-0 bg-gray-50" />
 
@@ -79,7 +112,6 @@ export default function ServiceBusinessHomepage() {
         </div>
       </section>
 
-      {/* Services */}
       <section id="services" className="max-w-7xl mx-auto px-6 py-24">
         <div className="max-w-2xl mb-14">
           <p className="text-sm uppercase tracking-[0.25em] text-neutral-500 mb-4">
@@ -93,28 +125,28 @@ export default function ServiceBusinessHomepage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             {
-              title: 'Lighting Design & Installation',
-              desc: 'Architectural lighting, recessed lighting, dimming systems, and premium fixture installs.',
+              title: "Lighting Design & Installation",
+              desc: "Architectural lighting, recessed lighting, dimming systems, and premium fixture installs.",
             },
             {
-              title: 'Service Upgrades',
-              desc: 'Panel upgrades, service replacements, grounding corrections, and code compliance.',
+              title: "Service Upgrades",
+              desc: "Panel upgrades, service replacements, grounding corrections, and code compliance.",
             },
             {
-              title: 'Troubleshooting & Repair',
-              desc: 'Efficient diagnosis and repair of electrical faults and intermittent issues.',
+              title: "Troubleshooting & Repair",
+              desc: "Efficient diagnosis and repair of electrical faults and intermittent issues.",
             },
             {
-              title: 'Commercial Buildouts',
-              desc: 'Tenant improvements, retail lighting, dedicated circuits, and infrastructure work.',
+              title: "Commercial Buildouts",
+              desc: "Tenant improvements, retail lighting, dedicated circuits, and infrastructure work.",
             },
             {
-              title: 'Smart Home Integration',
-              desc: 'Smart switches, automation systems, lighting scenes, and connected controls.',
+              title: "Smart Home Integration",
+              desc: "Smart switches, automation systems, lighting scenes, and connected controls.",
             },
             {
-              title: 'EV Chargers',
-              desc: 'Level 2 charger installation with load calculations and clean professional finishes.',
+              title: "EV Chargers",
+              desc: "Level 2 charger installation with load calculations and clean professional finishes.",
             },
           ].map((service) => (
             <div
@@ -128,7 +160,6 @@ export default function ServiceBusinessHomepage() {
         </div>
       </section>
 
-      {/* About */}
       <section id="about" className="border-y border-neutral-200 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -170,7 +201,6 @@ export default function ServiceBusinessHomepage() {
         </div>
       </section>
 
-      {/* Testimonials */}
       <section className="max-w-7xl mx-auto px-6 py-24">
         <div className="max-w-2xl mb-14">
           <p className="text-sm uppercase tracking-[0.25em] text-neutral-500 mb-4">
@@ -185,18 +215,18 @@ export default function ServiceBusinessHomepage() {
           {[
             {
               quote:
-                'Extremely clean work and excellent communication. The lighting layout completely transformed our home.',
-              name: 'Sarah M.',
+                "Extremely clean work and excellent communication. The lighting layout completely transformed our home.",
+              name: "Sarah M.",
             },
             {
               quote:
-                'Professional, punctual, and meticulous. One of the best contractors we have worked with.',
-              name: 'David R.',
+                "Professional, punctual, and meticulous. One of the best contractors we have worked with.",
+              name: "David R.",
             },
             {
               quote:
-                'Solved a difficult intermittent issue other electricians could not diagnose.',
-              name: 'Michael T.',
+                "Solved a difficult intermittent issue other electricians could not diagnose.",
+              name: "Michael T.",
             },
           ].map((item) => (
             <div
@@ -213,7 +243,6 @@ export default function ServiceBusinessHomepage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="px-6 pb-24">
         <div className="max-w-7xl mx-auto rounded-[2rem] border border-neutral-200 bg-gray-50 p-10 md:p-16">
           <div className="max-w-3xl">
@@ -244,42 +273,6 @@ export default function ServiceBusinessHomepage() {
           </div>
         </div>
       </section>
-
-      {/* Contact */}
-      <section id="contact" className="border-t border-neutral-200 bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16">
-          <div>
-            <p className="text-sm uppercase tracking-[0.25em] text-neutral-500 mb-4">
-              Contact
-            </p>
-
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight leading-tight">
-              Let’s talk about your project.
-            </h2>
-
-            <div className="mt-10 space-y-6 text-neutral-900 text-lg">
-              <div>
-                <div className="text-neutral-500 mb-1">Phone</div>
-                <div>(312) 478-6298</div>
-              </div>
-
-              <div>
-                <div className="text-neutral-500 mb-1">Email</div>
-                <div>contact@perfectlightchicago.com</div>
-              </div>
-
-              <div>
-                <div className="text-neutral-500 mb-1">Service Area</div>
-                <div>Chicago & Surrounding Suburbs</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-neutral-200 bg-white p-8">
-            <ContactForm />
-          </div>
-        </div>
-      </section>
     </div>
-  )
+  );
 }

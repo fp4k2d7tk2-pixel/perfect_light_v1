@@ -3,26 +3,16 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not set');
-      return NextResponse.json(
-        { error: 'Email service not configured' },
-        { status: 500 }
-      );
-    }
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(process.env.RESEND_API_KEY || '');
     const { name, email, message } = await request.json();
 
-    // Validation
-    if (!name || !email || !message) {
+    if (!name || !email) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -31,19 +21,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send email using Resend
+    const projectMessage = typeof message === 'string' && message.trim()
+      ? message
+      : `Initial contact submitted from the homepage contact form.`;
+
+    if (!process.env.RESEND_API_KEY) {
+      console.warn('RESEND_API_KEY is not set; skipping email delivery.');
+      return NextResponse.json(
+        { success: true, note: 'Email service not configured locally.' },
+        { status: 200 }
+      );
+    }
+
     const response = await resend.emails.send({
       from: 'Perfect Light <noreply@perfectlightchicago.com>',
       to: 'contact@perfectlightchicago.com',
       replyTo: email,
-      subject: `New contact form submission from ${name}`,
+      subject: `New lead from ${name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px;">
-          <h2>New Contact Form Submission</h2>
+          <h2>New Lead Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p style="white-space: pre-wrap;">${message}</p>
+          <p><strong>Project Note:</strong></p>
+          <p style="white-space: pre-wrap;">${projectMessage}</p>
         </div>
       `,
     });
