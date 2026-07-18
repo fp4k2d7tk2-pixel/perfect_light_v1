@@ -52,9 +52,9 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-    const response = await resend.emails.send({
+    const notificationResponse = await resend.emails.send({
       from: 'Perfect Light <noreply@perfectlightchicago.com>',
-      to: ['contact@perfectlightchicago.com', email],
+      to: 'contact@perfectlightchicago.com',
       replyTo: email,
       subject: `New project inquiry from ${name}`,
       html: businessHtml,
@@ -68,8 +68,8 @@ export async function POST(request: NextRequest) {
       html: confirmationHtml,
     });
 
-    if (response.error || confirmationResponse.error) {
-      console.error('Resend error:', response.error || confirmationResponse.error);
+    if (notificationResponse.error || confirmationResponse.error) {
+      console.error('Resend error:', notificationResponse.error || confirmationResponse.error);
       return NextResponse.json(
         { error: 'Failed to send email. Please try again later.' },
         { status: 500 }
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { success: true, id: response.data?.id },
+      { success: true, id: notificationResponse.data?.id },
       { status: 200 }
     );
   } catch (error) {
