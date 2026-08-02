@@ -102,7 +102,7 @@ export default function ServiceBusinessHomepage() {
             <div>
               <div className="rounded-3xl overflow-hidden border border-neutral-200 shadow-2xl bg-white">
                 <img
-                  src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=1600&auto=format&fit=crop"
+                  src="/Hero%20Image.JPG"
                   alt="Modern electrical work"
                   className="w-full h-[500px] object-cover"
                 />
