@@ -1,12 +1,14 @@
+import { cookies } from 'next/headers';
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+import { encodeContactSession } from '@/lib/contact-session';
 
 export async function POST(request: NextRequest) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY || '');
-    const { name, email, message } = await request.json();
+    const { name, email, phone, message } = await request.json();
 
-    if (!name || !email) {
+    if (!name || !email || !phone) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -33,6 +35,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const sessionPayload = encodeContactSession({
+      email,
+      phone,
+      name,
+    });
+
+    const cookieStore = await cookies();
+    cookieStore.set('contact-session', sessionPayload, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+      maxAge: 60 * 10,
+    });
+
     const response = await resend.emails.send({
       from: 'Perfect Light <noreply@perfectlightchicago.com>',
       to: 'contact@perfectlightchicago.com',
@@ -43,6 +60,7 @@ export async function POST(request: NextRequest) {
           <h2>New Lead Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
           <p><strong>Project Note:</strong></p>
           <p style="white-space: pre-wrap;">${projectMessage}</p>
         </div>

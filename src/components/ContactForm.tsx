@@ -3,6 +3,24 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+function formatPhoneNumber(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+
+  if (digits.length === 0) {
+    return "";
+  }
+
+  if (digits.length <= 3) {
+    return `(${digits}`;
+  }
+
+  if (digits.length <= 6) {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  }
+
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
+
 function ContactForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -21,6 +39,7 @@ function ContactForm() {
     const data = {
       name: formData.get("name")?.toString().trim(),
       email: formData.get("email")?.toString().trim(),
+      phone: formData.get("phone")?.toString().trim(),
       message: "Initial lead submitted from the homepage contact form.",
     };
 
@@ -35,16 +54,17 @@ function ContactForm() {
 
       if (!response.ok) {
         setError(result.error || "Failed to send your request. Please try again.");
-      } else {
-        setSuccess(true);
+        return;
       }
+
+      setSuccess(true);
+      form.reset();
+      router.push("/contact-details");
     } catch (err) {
       setError("An error occurred. Please try again.");
       console.error("Form submission error:", err);
     } finally {
       setLoading(false);
-      form.reset();
-      router.push(`/contact-details?name=${encodeURIComponent(data.name || "there")}`);
     }
   }
 
@@ -68,6 +88,21 @@ function ContactForm() {
           name="email"
           placeholder="you@example.com"
           required
+          className="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-4 outline-none focus:border-black transition-colors"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm text-neutral-600 mb-2">Phone</label>
+        <input
+          type="tel"
+          name="phone"
+          inputMode="tel"
+          placeholder="(312) 555-0123"
+          required
+          onChange={(e) => {
+            e.currentTarget.value = formatPhoneNumber(e.currentTarget.value);
+          }}
           className="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-4 outline-none focus:border-black transition-colors"
         />
       </div>

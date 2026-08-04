@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY || '');
-    const { name, email, projectType, timeline, projectDetails } = await request.json();
+    const { name, email, phone, projectType, timeline, projectDetails } = await request.json();
 
-    if (!name || !email || !projectType || !timeline || !projectDetails) {
+    if (!name || !email || !phone || !projectType || !timeline || !projectDetails) {
       return NextResponse.json(
         { error: 'Please complete all fields before submitting.' },
         { status: 400 }
@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
         <h2>New Project Details Submission</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Project Type:</strong> ${projectType}</p>
         <p><strong>Timeline:</strong> ${timeline}</p>
         <p><strong>Project Details:</strong></p>

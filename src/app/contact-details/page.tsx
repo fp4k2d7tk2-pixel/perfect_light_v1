@@ -1,15 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 function ContactDetailsForm() {
-  const searchParams = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const name = searchParams.get("name") || "there";
+  const [contactSession, setContactSession] = useState({
+    name: "there",
+    email: "",
+    phone: "",
+  });
+
+  useEffect(() => {
+    async function loadContactSession() {
+      try {
+        const response = await fetch("/api/contact-session", {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          return;
+        }
+
+        const session = await response.json();
+        setContactSession({
+          name: session.name || "there",
+          email: session.email || "",
+          phone: session.phone || "",
+        });
+      } catch (err) {
+        console.error("Failed to load contact session:", err);
+      }
+    }
+
+    loadContactSession();
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,8 +45,9 @@ function ContactDetailsForm() {
 
     const formData = new FormData(e.currentTarget);
     const payload = {
-      name,
-      email: formData.get("email")?.toString().trim(),
+      name: contactSession.name,
+      email: contactSession.email,
+      phone: contactSession.phone,
       projectType: formData.get("projectType")?.toString().trim(),
       timeline: formData.get("timeline")?.toString().trim(),
       projectDetails: formData.get("projectDetails")?.toString().trim(),
@@ -61,22 +89,11 @@ function ContactDetailsForm() {
           Tell us about your project
         </h1>
         <p className="mt-4 text-lg text-neutral-300 max-w-2xl leading-relaxed">
-          Thanks, {name}. Share a few details so we can prepare a tailored plan for your next electrical project.
+          Thanks, {contactSession.name}. Share a few details so we can prepare a tailored plan for your next electrical project.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-12 rounded-[2rem] border border-white/10 bg-white/10 p-8 md:p-10 backdrop-blur">
           <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm text-neutral-300 mb-2">Email</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-                className="w-full rounded-2xl border border-white/15 bg-neutral-900/70 px-5 py-4 outline-none focus:border-white"
-              />
-            </div>
-
             <div>
               <label className="block text-sm text-neutral-300 mb-2">Project type</label>
               <input
