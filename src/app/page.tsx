@@ -3,51 +3,43 @@ import ContactForm from "@/components/ContactForm";
 export default function ServiceBusinessHomepage() {
   return (
     <div className="min-h-screen bg-white text-neutral-900">
-      <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <a href="#" className="flex items-center">
-            <img
-              src="/logo.png"
-              alt="Perfect Light Electrical logo"
-              className="h-14 md:h-16 w-auto object-contain"
-            />
-          </a>
+      <header className="sticky top-0 z-50 w-full border-b border-slate-300/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.74),rgba(188,196,211,0.78),rgba(123,132,148,0.82),rgba(233,238,244,0.72))] shadow-[0_10px_40px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-12px_18px_rgba(0,0,0,0.12)] backdrop-blur-2xl backdrop-saturate-180">
+        <div className="flex w-full items-center justify-between gap-3 px-3 py-2.5 sm:px-4 md:px-6 md:py-3">
+          <img
+            src="/logo.png"
+            alt="Perfect Light Electrical logo"
+            className="h-11 w-auto object-contain drop-shadow-[0_0_14px_rgba(255,255,255,0.45)] md:h-14"
+          />
 
-          <nav className="hidden md:flex items-center gap-8 text-sm text-neutral-600">
-            <a href="#services" className="hover:text-black transition-colors">
-              Services
-            </a>
-            <a href="#about" className="hover:text-black transition-colors">
-              About
-            </a>
-            <a href="#contact" className="hover:text-black transition-colors">
-              Contact
-            </a>
-          </nav>
+          <div className="flex flex-1 items-center justify-center border-l border-slate-300/70 pl-3 sm:pl-4 md:pl-5">
+            <p className="text-center text-[10px] font-semibold tracking-[0.18em] text-slate-900 uppercase sm:text-xs md:text-sm [text-shadow:0_1px_0_rgba(255,255,255,0.7)]">
+              Perfect Light - Chicago&apos;s Finest Electricians
+            </p>
+          </div>
         </div>
       </header>
 
-      <section id="contact" className="border-b border-neutral-200 bg-neutral-950 text-white">
+      <section id="contact" className="border-b border-neutral-200 bg-white text-neutral-900">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-start">
             <div>
-              <p className="text-sm uppercase tracking-[0.25em] text-neutral-400 mb-4">
+              <p className="text-sm uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 Contact
               </p>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
-                Chicago&apos;s Finest Electricians
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight text-neutral-900">
+                Tell us about your project
               </h2>
-              <p className="mt-6 text-lg text-neutral-300 max-w-xl leading-relaxed">
-                Fast response, clean work, and dependable service for homes and businesses across Chicago.
+              <p className="mt-6 text-lg text-neutral-700 max-w-2xl leading-relaxed">
+                Whether replacing a fixture, adding lighting controls and outlets, or re-wiring an older building, Perfect Light is excited to give your home the beauty and functionality it deserves.
               </p>
 
-              <div className="mt-8 rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur">
-                <p className="text-sm uppercase tracking-[0.25em] text-neutral-400 mb-3">
+              <div className="mt-8 rounded-3xl border border-neutral-300 bg-white p-6 shadow-sm">
+                <p className="text-sm uppercase tracking-[0.25em] text-neutral-500 mb-3">
                   Call now
                 </p>
                 <a
                   href="tel:+13124786298"
-                  className="text-3xl md:text-4xl font-semibold hover:text-neutral-200 transition-colors"
+                  className="text-3xl md:text-4xl font-semibold text-neutral-900 hover:text-neutral-700 transition-colors"
                 >
                   (312) 478-6298
                 </a>
@@ -61,55 +53,20 @@ export default function ServiceBusinessHomepage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-b border-neutral-800">
-        <div className="absolute inset-0 bg-gray-50" />
+      <section className="relative h-[80vh] min-h-[560px] w-full overflow-hidden border-b border-neutral-800 bg-black">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          poster="/Poster%20Image.png"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src="/Hero%20Video.mp4" type="video/mp4" />
+        </video>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-28 lg:py-40">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center rounded-full border border-neutral-200 px-4 py-2 text-sm text-neutral-600 bg-white/70 mb-6 backdrop-blur">
-                Licensed • Insured • Residential & Commercial
-              </div>
-
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-tight">
-                Premium Electrical
-                <span className="block text-neutral-500">Work Done Right.</span>
-              </h1>
-
-              <p className="mt-8 text-lg text-neutral-600 max-w-xl leading-relaxed">
-                Modern electrical installations, lighting design, troubleshooting,
-                and service upgrades for homes and businesses throughout the
-                Chicago area.
-              </p>
-
-              <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                <a
-                  href="#contact"
-                  className="rounded-2xl bg-white text-black px-7 py-4 font-medium hover:scale-[1.02] transition-transform"
-                >
-                  Request Estimate
-                </a>
-
-                <a
-                  href="tel:+13124786298"
-                  className="rounded-2xl border border-neutral-300 px-7 py-4 font-medium hover:bg-neutral-100 transition-colors"
-                >
-                  Call (312) 478-6298
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <div className="rounded-3xl overflow-hidden border border-neutral-200 shadow-2xl bg-white">
-                <img
-                  src="/Hero%20Image.JPG"
-                  alt="Modern electrical work"
-                  className="w-full h-[500px] object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/20 to-black/35" />
       </section>
 
       <section id="services" className="max-w-7xl mx-auto px-6 py-24">
@@ -198,48 +155,6 @@ export default function ServiceBusinessHomepage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="max-w-2xl mb-14">
-          <p className="text-sm uppercase tracking-[0.25em] text-neutral-500 mb-4">
-            Testimonials
-          </p>
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
-            Trusted by homeowners and businesses.
-          </h2>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-6">
-          {[
-            {
-              quote:
-                "Extremely clean work and excellent communication. The lighting layout completely transformed our home.",
-              name: "Sarah M.",
-            },
-            {
-              quote:
-                "Professional, punctual, and meticulous. One of the best contractors we have worked with.",
-              name: "David R.",
-            },
-            {
-              quote:
-                "Solved a difficult intermittent issue other electricians could not diagnose.",
-              name: "Michael T.",
-            },
-          ].map((item) => (
-            <div
-              key={item.name}
-              className="rounded-3xl border border-neutral-200 p-8 bg-white"
-            >
-              <p className="text-lg leading-relaxed text-neutral-600">
-                “{item.quote}”
-              </p>
-
-              <div className="mt-8 text-neutral-500">— {item.name}</div>
-            </div>
-          ))}
         </div>
       </section>
 
