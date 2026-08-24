@@ -1,0 +1,12 @@
+# Cloudflare Pages custom headers for the static site.
+# See https://developers.cloudflare.com/pages/configuration/headers/
+
+/admin/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/content/*
+  Cache-Control: no-cache
+
+/api/*
+  Cache-Control: no-store

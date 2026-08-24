@@ -1,0 +1,74 @@
+# =============================================================================
+# Perfect Light Chicago — Sveltia CMS configuration
+# =============================================================================
+# What this file does:
+#   Tells the CMS which repo to save changes to, how to authenticate, and
+#   what content fields Cosimo can edit through the admin UI.
+#
+# Right now the CMS manages ONE thing: Projects (the photo grid on
+# /projects.html). Other editable areas (home hero, about, service copy,
+# FAQ) will be added in a follow-up.
+# =============================================================================
+
+backend:
+  name: github
+  repo: fp4k2d7tk2-pixel/perfect_light_v1
+  branch: main
+  # OAuth flow is brokered by our own Cloudflare Pages Function at /oauth
+  # (see functions/oauth/ and functions/callback/ in the repo root).
+  base_url: https://perfectlightchicago.com
+  auth_endpoint: oauth
+
+# Media (photos) are stored inside the repo under site/assets/projects/
+# so they're deployed as static files at /assets/projects/<file>.
+media_folder: "site/assets/projects"
+public_folder: "/assets/projects"
+
+# Show a live-preview link in the CMS
+site_url: https://perfectlightchicago.com
+display_url: https://perfectlightchicago.com
+
+collections:
+  - name: "projects"
+    label: "Projects"
+    label_singular: "Project"
+    folder: "content/projects"
+    create: true
+    delete: true
+    slug: "{{year}}-{{room}}-{{neighborhood}}"
+    summary: "{{room}} · {{neighborhood}} — {{title}}"
+    sortable_fields: ["order", "year", "title"]
+    view_filters:
+      - label: "Published"
+        field: published
+        pattern: true
+      - label: "Drafts"
+        field: published
+        pattern: false
+    fields:
+      - {label: "Title / description", name: "title", widget: "string",
+         hint: "One line — e.g. 'Layered recessed lighting with pendant accents'"}
+      - {label: "Room", name: "room", widget: "select",
+         options: ["Kitchen", "Living Room", "Dining Room", "Primary Suite",
+                   "Bedroom", "Bathroom", "Home Office", "Hallway",
+                   "Entry", "Basement", "Whole Home", "Exterior", "Other"]}
+      - {label: "Neighborhood", name: "neighborhood", widget: "select",
+         options: ["Lakeview", "Lincoln Park", "Lincoln Square", "Roscoe Village",
+                   "Wrigleyville", "Northalsted", "Bucktown", "Wicker Park",
+                   "Old Town", "Gold Coast", "Streeterville", "West Loop",
+                   "Logan Square", "Other Chicago"]}
+      - {label: "Photo", name: "image", widget: "image",
+         hint: "Landscape or portrait photo. Will be cropped 4:5. Aim for at least 1200px on the long edge.",
+         required: true}
+      - {label: "Photo alt text", name: "image_alt", widget: "string",
+         hint: "One line describing what's in the photo — helps SEO and accessibility.",
+         required: false}
+      - {label: "Year", name: "year", widget: "number", value_type: "int",
+         min: 2020, max: 2035, default: 2026, required: false}
+      - {label: "Display order", name: "order", widget: "number", value_type: "int",
+         hint: "Lower numbers appear first (1 = top of grid). Leave blank for auto.",
+         min: 1, max: 999, default: 100, required: false}
+      - {label: "Published", name: "published", widget: "boolean", default: true,
+         hint: "Uncheck to save as a draft that doesn't appear on the live site."}
+      - {label: "Notes (private)", name: "notes", widget: "text", required: false,
+         hint: "Internal notes for Cosimo — not shown on the public site."}

@@ -1,27 +1,14 @@
 {
   "name": "perfectlight_site_v1",
-  "version": "0.1.0",
+  "version": "0.2.0-preview",
   "private": true,
+  "description": "Perfect Light Chicago — redesign preview branch. Static site + Sveltia CMS. Deployed via Cloudflare Pages.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && npx --yes serve dist -l 8787",
+    "clean": "rm -rf dist"
   },
-  "dependencies": {
-    "next": "16.2.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "resend": "^6.12.3"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.6",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+  "engines": {
+    "node": ">=18"
   }
 }

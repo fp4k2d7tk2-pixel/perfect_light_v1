@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Perfect Light Chicago — redesign preview branch
 
-## Getting Started
+**This is a preview branch. It does not affect the live site until merged.**
 
-First, run the development server:
+- Live site (built from `main`): https://www.perfectlightchicago.com
+- Preview site (built from this branch): auto-generated Cloudflare Pages preview URL
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## What's on this branch
+
+A full 22-page static redesign of the site, plus:
+
+- A lightweight admin at `/admin/` (Sveltia CMS) for adding project photos
+- A Cloudflare Pages Function at `/api/contact` that emails leads via Resend
+- A minimal Node build script that gathers CMS content into the static site
+
+## Structure
+
+```
+perfect_light_v1/
+├─ site/                     # The static site — every URL served from here
+│  ├─ index.html
+│  ├─ contact.html
+│  ├─ projects.html
+│  ├─ lighting/…
+│  ├─ neighborhoods/…
+│  ├─ css/styles.css
+│  ├─ js/projects.js         # Renders /content/projects.json into the page
+│  └─ js/script.js
+├─ admin/                    # Sveltia CMS admin (served at /admin/)
+│  ├─ index.html
+│  └─ config.yml
+├─ content/                  # Source-of-truth content edited via the CMS
+│  └─ projects/*.md
+├─ functions/                # Cloudflare Pages Functions (runtime endpoints)
+│  ├─ api/contact.js         # POST /api/contact — Resend email
+│  ├─ oauth.js               # GET /oauth      — Sveltia GitHub OAuth step 1
+│  └─ callback.js            # GET /callback   — Sveltia GitHub OAuth step 2
+├─ scripts/build.mjs         # Compiles content/ + site/ → dist/
+├─ docs/CMS-SETUP.md         # One-time OAuth setup for Cosimo's login
+└─ package.json              # `npm run build` → node scripts/build.mjs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Cloudflare Pages settings for this branch
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
+- **Root directory:** (leave empty)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Required env vars
 
-## Learn More
+| Name                          | Purpose                                |
+| ----------------------------- | -------------------------------------- |
+| `RESEND_API_KEY`              | Contact form emails                    |
+| `OAUTH_GITHUB_CLIENT_ID`      | Sveltia CMS login (see docs/CMS-SETUP) |
+| `OAUTH_GITHUB_CLIENT_SECRET`  | Sveltia CMS login (see docs/CMS-SETUP) |
 
-To learn more about Next.js, take a look at the following resources:
+## Local development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+npm run build       # builds dist/
+npm run dev         # builds and serves dist/ on http://localhost:8787
+```
