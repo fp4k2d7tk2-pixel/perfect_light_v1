@@ -2,11 +2,10 @@
   "name": "perfectlight_site_v1",
   "version": "0.2.0-preview",
   "private": true,
-  "description": "Perfect Light Chicago — redesign preview branch. Static site + Sveltia CMS. Deployed via Cloudflare Pages.",
+  "description": "Perfect Light Chicago — static site + Sveltia CMS + Vercel Serverless Functions.",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "dev": "node scripts/build.mjs && npx --yes serve dist -l 8787",
-    "clean": "rm -rf dist"
+    "dev": "node scripts/build.mjs && npx --yes serve public -l 8787"
   },
   "engines": {
     "node": ">=18"

@@ -1,28 +1,28 @@
 #!/usr/bin/env node
 /*
   build.mjs
-  Perfect Light Chicago — minimal static build.
+  Perfect Light Chicago — content build step (Vercel).
 
   What it does:
-    1. Reads every project entry in /content/projects/*.md (frontmatter + notes)
-    2. Emits /site/content/projects.json — consumed by /site/js/projects.js
-    3. Copies /site → /dist (the folder Cloudflare Pages publishes)
+    Reads every project entry under /content/projects/*.md (frontmatter + notes)
+    Writes /public/content/projects.json  — consumed by /public/js/projects.js
 
-  Zero dependencies: uses only Node's built-in fs/path modules.
+  Vercel then serves everything under /public/ as static content, plus /api/*.js
+  as Serverless Functions. No output directory needed.
+
+  Zero dependencies — uses only Node's built-in fs/path modules.
 */
 
-import { readdir, readFile, writeFile, mkdir, cp, rm, stat } from "node:fs/promises";
+import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONTENT_DIR = path.join(ROOT, "content");
-const SITE_DIR = path.join(ROOT, "site");
-const DIST_DIR = path.join(ROOT, "dist");
+const PUBLIC_DIR = path.join(ROOT, "public");
 
-// --- tiny frontmatter parser ---------------------------------------------
-// Format: --- \n key: value \n ... \n --- \n body
+// Tiny YAML-frontmatter parser (subset)
 function parseFrontmatter(text) {
   const m = text.match(/^---\s*\n([\s\S]*?)\n---\s*(?:\n([\s\S]*))?$/);
   if (!m) return { data: {}, body: text };
@@ -30,7 +30,6 @@ function parseFrontmatter(text) {
   const body = m[2] || "";
   const data = {};
 
-  // Extremely small YAML subset: `key: value` and `key: |` block literals.
   const lines = yaml.split("\n");
   let i = 0;
   while (i < lines.length) {
@@ -41,7 +40,6 @@ function parseFrontmatter(text) {
     const key = kv[1];
     let val = kv[2];
     if (val === "|" || val === ">") {
-      // Block literal — collect indented lines
       const block = [];
       i++;
       while (i < lines.length && (lines[i].startsWith("  ") || lines[i] === "")) {
@@ -51,7 +49,6 @@ function parseFrontmatter(text) {
       data[key] = block.join("\n").trim();
       continue;
     }
-    // Strip quotes if present
     val = val.trim();
     if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
       val = val.slice(1, -1);
@@ -64,11 +61,10 @@ function parseFrontmatter(text) {
   return { data, body: body.trim() };
 }
 
-// --- projects -------------------------------------------------------------
 async function buildProjects() {
   const dir = path.join(CONTENT_DIR, "projects");
   if (!existsSync(dir)) {
-    console.log("[build] no content/projects/ directory; skipping");
+    console.log("[build] no content/projects/ directory; writing empty array");
     return [];
   }
   const files = (await readdir(dir)).filter((f) => f.endsWith(".md") && !f.startsWith("."));
@@ -93,37 +89,18 @@ async function buildProjects() {
   return projects;
 }
 
-// --- main -----------------------------------------------------------------
 async function main() {
-  console.log("[build] Perfect Light Chicago");
-  console.log(`[build] root: ${ROOT}`);
+  console.log("[build] Perfect Light Chicago — content build");
 
-  // 1. Compile content
   const projects = await buildProjects();
   console.log(`[build] projects: ${projects.length} entries (${projects.filter((p) => p.published).length} published)`);
 
-  // 2. Fresh dist
-  if (existsSync(DIST_DIR)) await rm(DIST_DIR, { recursive: true, force: true });
-  await mkdir(DIST_DIR, { recursive: true });
-
-  // 3. Copy site/ → dist/
-  await cp(SITE_DIR, DIST_DIR, { recursive: true });
-
-  // 4. Copy content/ → dist/content/ so Sveltia + fetch() can read the source files
-  await cp(CONTENT_DIR, path.join(DIST_DIR, "content"), { recursive: true });
-
-  // 5. Emit compiled JSON — must run AFTER the cp above or it gets overwritten
-  const contentOut = path.join(DIST_DIR, "content");
+  const contentOut = path.join(PUBLIC_DIR, "content");
+  await mkdir(contentOut, { recursive: true });
   await writeFile(path.join(contentOut, "projects.json"), JSON.stringify(projects, null, 2));
 
-  // 6. Copy CMS admin (if present) to dist/admin
-  const adminSrc = path.join(ROOT, "admin");
-  if (existsSync(adminSrc)) {
-    await cp(adminSrc, path.join(DIST_DIR, "admin"), { recursive: true });
-    console.log("[build] admin: CMS admin copied to /admin");
-  }
-
-  console.log("[build] done → dist/");
+  console.log(`[build] wrote ${path.relative(ROOT, path.join(contentOut, "projects.json"))}`);
+  console.log("[build] done");
 }
 
 main().catch((err) => {
